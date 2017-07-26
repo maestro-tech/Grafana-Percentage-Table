@@ -40,6 +40,7 @@ class PercentageTablePanelCtrl extends TablePanelCtrl {
       result.data[0].rows[i][2] = res;
     }
 
+    console.log('calling');
     return super.handleQueryResult(result);
   }
 }

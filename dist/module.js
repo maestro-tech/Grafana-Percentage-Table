@@ -132,6 +132,7 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/tab
               result.data[0].rows[i][2] = res;
             }
 
+            console.log('calling');
             return _get(PercentageTablePanelCtrl.prototype.__proto__ || Object.getPrototypeOf(PercentageTablePanelCtrl.prototype), 'handleQueryResult', this).call(this, result);
           }
         }]);
