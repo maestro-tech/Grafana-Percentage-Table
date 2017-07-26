@@ -12,6 +12,7 @@ class PercentageTablePanelCtrl extends TablePanelCtrl {
   constructor($scope, $injector, $rootScope) {
     super($scope, $injector, $rootScope);
     this.$rootScope = $rootScope;
+    this.render();
   }
 
   handleQueryResult(result) {
