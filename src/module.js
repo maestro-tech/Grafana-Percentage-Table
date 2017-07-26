@@ -10,7 +10,7 @@ class PercentageTablePanelCtrl extends TablePanelCtrl {
 
   /** @ngInject */
   constructor($scope, $injector, $rootScope) {
-    super($scope, $injector);
+    super($scope, $injector, $rootScope);
     this.$rootScope = $rootScope;
   }
 
@@ -40,25 +40,7 @@ class PercentageTablePanelCtrl extends TablePanelCtrl {
       result.data[0].rows[i][2] = res;
     }
 
-    this.setTimeQueryEnd();
-    this.loading = false;
-
-    // check for if data source returns subject
-    if (result && result.subscribe) {
-      this.handleDataStream(result);
-      return;
-    }
-
-    if (this.dashboard.snapshot) {
-      this.panel.snapshotData = result.data;
-    }
-
-    if (!result || !result.data) {
-      console.log('Data source query result invalid, missing data field:', result);
-      result = {data: []};
-    }
-
-    this.events.emit('data-received', result.data);
+    return super.handleQueryResult(result);
   }
 }
 

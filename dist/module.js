@@ -3,7 +3,7 @@
 System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/table/module'], function (_export, _context) {
   "use strict";
 
-  var angular, _, $, moment, TablePanelCtrl, _createClass, PercentageTablePanelCtrl;
+  var angular, _, $, moment, TablePanelCtrl, _createClass, _get, PercentageTablePanelCtrl;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -66,6 +66,31 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/tab
         };
       }();
 
+      _get = function get(object, property, receiver) {
+        if (object === null) object = Function.prototype;
+        var desc = Object.getOwnPropertyDescriptor(object, property);
+
+        if (desc === undefined) {
+          var parent = Object.getPrototypeOf(object);
+
+          if (parent === null) {
+            return undefined;
+          } else {
+            return get(parent, property, receiver);
+          }
+        } else if ("value" in desc) {
+          return desc.value;
+        } else {
+          var getter = desc.get;
+
+          if (getter === undefined) {
+            return undefined;
+          }
+
+          return getter.call(receiver);
+        }
+      };
+
       _export('PanelCtrl', _export('PercentageTablePanelCtrl', PercentageTablePanelCtrl = function (_TablePanelCtrl) {
         _inherits(PercentageTablePanelCtrl, _TablePanelCtrl);
 
@@ -73,7 +98,7 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/tab
         function PercentageTablePanelCtrl($scope, $injector, $rootScope) {
           _classCallCheck(this, PercentageTablePanelCtrl);
 
-          var _this = _possibleConstructorReturn(this, (PercentageTablePanelCtrl.__proto__ || Object.getPrototypeOf(PercentageTablePanelCtrl)).call(this, $scope, $injector));
+          var _this = _possibleConstructorReturn(this, (PercentageTablePanelCtrl.__proto__ || Object.getPrototypeOf(PercentageTablePanelCtrl)).call(this, $scope, $injector, $rootScope));
 
           _this.$rootScope = $rootScope;
           return _this;
@@ -107,25 +132,7 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/tab
               result.data[0].rows[i][2] = res;
             }
 
-            this.setTimeQueryEnd();
-            this.loading = false;
-
-            // check for if data source returns subject
-            if (result && result.subscribe) {
-              this.handleDataStream(result);
-              return;
-            }
-
-            if (this.dashboard.snapshot) {
-              this.panel.snapshotData = result.data;
-            }
-
-            if (!result || !result.data) {
-              console.log('Data source query result invalid, missing data field:', result);
-              result = { data: [] };
-            }
-
-            this.events.emit('data-received', result.data);
+            return _get(PercentageTablePanelCtrl.prototype.__proto__ || Object.getPrototypeOf(PercentageTablePanelCtrl.prototype), 'handleQueryResult', this).call(this, result);
           }
         }]);
 
