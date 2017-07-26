@@ -101,6 +101,7 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/tab
           var _this = _possibleConstructorReturn(this, (PercentageTablePanelCtrl.__proto__ || Object.getPrototypeOf(PercentageTablePanelCtrl)).call(this, $scope, $injector, $rootScope));
 
           _this.$rootScope = $rootScope;
+          _this.render();
           return _this;
         }
 
@@ -139,6 +140,8 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/tab
 
         return PercentageTablePanelCtrl;
       }(TablePanelCtrl)));
+
+      PercentageTablePanelCtrl.templateUrl = 'module.html';
 
       _export('PercentageTablePanelCtrl', PercentageTablePanelCtrl);
 
