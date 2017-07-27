@@ -142,7 +142,7 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/tab
         return PercentageTablePanelCtrl;
       }(TablePanelCtrl)));
 
-      PercentageTablePanelCtrl.templateUrl = '../../app/plugins/panel/table/module.html';
+      PercentageTablePanelCtrl.templateUrl = 'public/app/plugins/panel/table/module.html';
 
       _export('PercentageTablePanelCtrl', PercentageTablePanelCtrl);
 

@@ -47,7 +47,7 @@ class PercentageTablePanelCtrl extends TablePanelCtrl {
   }
 }
 
-PercentageTablePanelCtrl.templateUrl = '../../app/plugins/panel/table/module.html';
+PercentageTablePanelCtrl.templateUrl = 'public/app/plugins/panel/table/module.html';
 
 export {
   PercentageTablePanelCtrl,
