@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/table/module'], function (_export, _context) {
+System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/table/module.js'], function (_export, _context) {
   "use strict";
 
   var angular, _, $, moment, TablePanelCtrl, _createClass, _get, PercentageTablePanelCtrl;
@@ -44,8 +44,8 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/tab
       $ = _jquery.default;
     }, function (_moment) {
       moment = _moment.default;
-    }, function (_appPluginsPanelTableModule) {
-      TablePanelCtrl = _appPluginsPanelTableModule.TablePanelCtrl;
+    }, function (_appPluginsPanelTableModuleJs) {
+      TablePanelCtrl = _appPluginsPanelTableModuleJs.TablePanelCtrl;
     }],
     execute: function () {
       _createClass = function () {
@@ -102,8 +102,6 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/plugins/panel/tab
 
           _this.$rootScope = $rootScope;
 
-          console.log(_this.panelDefaults);
-          console.log(_this.panel);
           _.defaults(_this.panel, _this.panelDefaults);
           return _this;
         }

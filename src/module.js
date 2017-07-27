@@ -4,7 +4,7 @@ import angular from 'angular';
 import _ from 'lodash';
 import $ from 'jquery';
 import moment from 'moment';
-import {TablePanelCtrl} from 'app/plugins/panel/table/module';
+import {TablePanelCtrl} from 'app/plugins/panel/table/module.js';
 
 class PercentageTablePanelCtrl extends TablePanelCtrl {
 
@@ -13,8 +13,6 @@ class PercentageTablePanelCtrl extends TablePanelCtrl {
     super($scope, $injector, $rootScope);
     this.$rootScope = $rootScope;
 
-    console.log(this.panelDefaults);
-    console.log(this.panel);
     _.defaults(this.panel, this.panelDefaults);
   }
 
