@@ -117,6 +117,7 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/core/utils/file_e
           _this.panelDefaults = {
             targets: [{}],
             transform: 'timeseries_to_columns',
+            database: null,
             pageSize: null,
             showHeader: true,
             styles: [{
@@ -215,11 +216,18 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/core/utils/file_e
           key: 'handleQueryResult',
           value: function handleQueryResult(result) {
             if (result.data.length !== 2) {
-              "";
               var error = new Error();
               error.message = 'Too many series error';
               error.data = 'Metric query returns ' + result.data.length + ' series.\nPercentage stat table panel expects two series.';
               throw error;
+            }
+
+            if (!result.data[0].type || !result.data[1].type) {
+              console.log('"FORMAT AS" must be "Table" not "Time series"');
+              var _error = new Error();
+              _error.message = 'Wrong value for "FORMAT AS"';
+              _error.data = '"FORMAT AS" must be "Table" not "Time series"';
+              throw _error;
             }
 
             var lengthSerieA = result.data[0].rows.length;
@@ -227,15 +235,15 @@ System.register(['angular', 'lodash', 'jquery', 'moment', 'app/core/utils/file_e
             var maxLengthSeries = lengthSerieA > lengthSerieB ? lengthSerieA : lengthSerieB;
 
             if (lengthSerieA !== lengthSerieB) {
-              var _error = new Error();
-              _error.message = 'Not same amount of data';
-              _error.data = 'Serie A has ' + lengthSerieA + ' while Serie B has ' + lengthSerieB;
-              throw _error;
+              var _error2 = new Error();
+              _error2.message = 'Not same amount of data';
+              _error2.data = 'Serie A has ' + lengthSerieA + ' while Serie B has ' + lengthSerieB;
+              throw _error2;
             }
 
             for (var i = 0; i < maxLengthSeries; i++) {
               var dataFirst = result.data[0].rows[i][2];
-              var dataSecond = result.data[1].rows[i][2];
+              var dataSecond = result.data[1].rows[i][2] == 0 ? 1 : result.data[1].rows[i][2];
               var res = dataFirst / dataSecond * 100;
               result.data[0].rows[i][2] = res;
             }

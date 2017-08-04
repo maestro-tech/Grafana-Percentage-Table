@@ -22,6 +22,7 @@ class PercentageTablePanelCtrl extends MetricsPanelCtrl {
     this.panelDefaults = {
         targets: [{}],
         transform: 'timeseries_to_columns',
+        database: null,
         pageSize: null,
         showHeader: true,
         styles: [
@@ -115,12 +116,21 @@ class PercentageTablePanelCtrl extends MetricsPanelCtrl {
   }
 
   handleQueryResult(result) {
-    if (result.data.length !== 2) {""
+    if (result.data.length !== 2) {
       let error = new Error();
       error.message = 'Too many series error';
       error.data = 'Metric query returns ' + result.data.length + ' series.\nPercentage stat table panel expects two series.';
       throw error;
     }
+
+    if (!result.data[0].type || !result.data[1].type) {
+      console.log('"FORMAT AS" must be "Table" not "Time series"')
+      let error = new Error();
+      error.message = 'Wrong value for "FORMAT AS"';
+      error.data = '"FORMAT AS" must be "Table" not "Time series"';
+      throw error;
+    }
+
 
     const lengthSerieA = result.data[0].rows.length;
     const lengthSerieB = result.data[1].rows.length;
@@ -135,7 +145,7 @@ class PercentageTablePanelCtrl extends MetricsPanelCtrl {
 
     for (let i = 0; i < maxLengthSeries; i++) {
       const dataFirst = result.data[0].rows[i][2];
-      const dataSecond = result.data[1].rows[i][2];
+      const dataSecond = result.data[1].rows[i][2] == 0 ? 1 : result.data[1].rows[i][2];
       const res = (dataFirst / dataSecond) * 100;
       result.data[0].rows[i][2] = res;
     }
